@@ -1,2 +1,4 @@
 # SegwayRobot
-Senior Design Project at Arizona State Unibersity
+Senior Design Project at Arizona State University
+
+
