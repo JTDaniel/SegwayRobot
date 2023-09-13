@@ -1,0 +1,106 @@
+<mxfile host="Electron" modified="2023-09-13T04:33:24.620Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="SvUbvSRbe0pywFpsKRQt" version="21.6.8" type="device">
+  <diagram name="Page-1" id="tqtxS2Ez3ocnhssswBmb">
+    <mxGraphModel dx="2462" dy="1003" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tV1nf71V3TujBMHyTpnP-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-2" target="tV1nf71V3TujBMHyTpnP-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-2" value="MicroController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="310" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-3" target="tV1nf71V3TujBMHyTpnP-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-3" target="tV1nf71V3TujBMHyTpnP-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-3" value="Motor Driver" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-4" value="Motor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-5" value="Motor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-9" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-9" value="Rotary Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-11" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-11" value="Inertial Measurement Unit" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="90" width="200" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-12" value="Accelerometer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-11">
+          <mxGeometry x="40" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-13" value="Gyroscope" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-11">
+          <mxGeometry x="40" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-14" value="Magnetometer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-11">
+          <mxGeometry x="40" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-18" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-18" value="Rotary Encoder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="530" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-22" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-22" value="Ranging" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="90" width="200" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-23" value="UItrasonic Sensor" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-22">
+          <mxGeometry x="40" y="30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-24" value="Near Field Infrared" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-22">
+          <mxGeometry x="40" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-25" value="LIDAR" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="tV1nf71V3TujBMHyTpnP-22">
+          <mxGeometry x="40" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-27" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-27" value="Additional Transducers" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-28" target="tV1nf71V3TujBMHyTpnP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-28" value="Communication Transciever" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-32" target="tV1nf71V3TujBMHyTpnP-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-32" value="MicroController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="730" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="tV1nf71V3TujBMHyTpnP-33" target="tV1nf71V3TujBMHyTpnP-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-33" value="Communication Transciever" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="730" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-34" value="Personal Computer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="730" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-37" value="Robot Control Signals" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="740" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="tV1nf71V3TujBMHyTpnP-38" value="Client Control Signals" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="690" width="440" height="130" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
