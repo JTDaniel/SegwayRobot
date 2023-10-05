@@ -35,7 +35,10 @@ class ObstacleDetectionMap():
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.title("SegWay Robot Client")
+    mainframe = tk.Frame(master= root)
 
+    
 
 
     root.mainloop()
