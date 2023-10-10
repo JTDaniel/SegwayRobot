@@ -11,20 +11,50 @@ import matplotlib.pyplot as plt
 class Robot_Tilt():
     def __init__(self) -> None:
         self.canvas_size = (300, 300)
+        self.robot_wheel_radius = 75
+        
         pass
 
     def Generate_Frame(self, parentFrame, x, y) -> None:
-        tilt_frame = tk.Frame(parentFrame, padx= 25, pady= 25)
-        tilt_frame.grid(row= x, column= y)
+        self.frame = tk.Frame(parentFrame, padx= 25, pady= 25)
+        self.frame.grid(row= x, column= y)
+        title= tk.Label(self.frame, text= "Robot Tilt Graphic")
+        self.canvas = tk.Canvas(self.frame, bg= 'white', width= self.canvas_size[0], height= self.canvas_size[1])
 
-        title= tk.Label(tilt_frame, text= "Robot Tilt Graphic")
-
-        tilt_canvas = tk.Canvas(tilt_frame, bg= 'white', width= self.canvas_size[0], height= self.canvas_size[1])
-        tilt_canvas.create_oval(self.canvas_size[0]/4, self.canvas_size[1], 3*self.canvas_size[0]/4, self.canvas_size[0]/2, fill= 'blue')
+        self.Create_Wheel(self.robot_wheel_radius)
+        self.Create_Vertical_Axis(self.robot_wheel_radius)
+        self.Create_Azimuth(-45, self.robot_wheel_radius, 400)
         
         title.grid(row= 0, column= 0)
-        tilt_canvas.grid(row= 1, column= 0)
+        self.canvas.grid(row= 1, column= 0)
         
+    def Create_Wheel(self, radius) -> None:
+        self.robot_wheel = (self.canvas_size[0]/2-radius, self.canvas_size[1], self.canvas_size[0]/2+radius, self.canvas_size[1]-radius*2)
+        self.canvas.create_oval(self.robot_wheel, fill= 'blue')
+
+    def Create_Body(self, angle, width, height) -> None:
+        pass
+
+    def Create_Vertical_Axis(self, radius) -> None:
+        self.canvas.create_line(self.canvas_size[0]/2, self.canvas_size[1] - radius, self.canvas_size[0]/2, 0, dash= 5, fill= 'red')
+        pass
+
+    def Create_Azimuth(self, angle, radius, length) -> None:
+
+        angle = self.Degree_To_Radian(angle)
+        
+        x2 = (int(np.sin(angle) * length) + self.canvas_size[0]/2)
+        y2 = self.canvas_size[1] - radius - int(np.cos(angle) * length)
+
+        self.canvas.create_line(self.canvas_size[0]/2, self.canvas_size[1] - radius, x2, y2, dash = 10, fill= 'black')
+
+        pass
+
+    def Create_Theta_Arc(self, angle, radius) -> None:
+        pass
+
+    def Degree_To_Radian(self, angle) -> float:
+        return angle * (np.pi / 180)
 
     def updatePosition() -> None:
         pass
@@ -89,10 +119,19 @@ class Obstacle_Detection_Map():
     def __init__(self) -> None:
         pass
 
+###########################################################################
+# The below class will create a widget that shows the previous ten seconds
+# of angular displacement, this angular displacement will allow calculation
+# of Overshoot, settling time, damping factor, etc.
+###########################################################################
+class Damping_Features():
+    def __init__(self) -> None:
+        pass
 
 
 
 if __name__ == "__main__":
+
     root = tk.Tk()
     root.title("SegWay Robot Client")
     mainframe = tk.Frame(master = root)
