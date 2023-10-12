@@ -15,7 +15,7 @@
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8">
+  <!-- <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8"> -->
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8" /> -->
 
@@ -26,47 +26,48 @@
 
 <!-- Status -->
 
-<!-- <h4 align="center"> 
+<h4 align="center"> 
 	🚧  SegwayRobot 🚀 Under construction...  🚧
 </h4> 
 
-<hr> -->
+<hr> 
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <!-- <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a> -->
 </p>
 
 <br>
 
 ## :dart: About ##
 
-Make an autonomous Segway Robot for ASU Senior Design.  
+This repository stores all the information about our teams Segway Robot Senior design project.  This robot will act as an educational toy to teach the fundamentals of feedback and closed loop control systems.  Complete with a [GUI](/GUI/) to show a variety of widgets that will reinforce learning and allow wireless interaction with the robot.  Operators will learn the basics of PID systems, Ordinary Differential Equations, Frequency Domain Represenation, Plant Modeling, Autonomous Systems, and Obstacle Detection.
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Obstacle Detection;\
-:heavy_check_mark: Client Side GUI;\
-:heavy_check_mark: Configurable PID;\
-:heavy_check_mark: Modular Sensors;\
-:heavy_check_mark: Educational Wrapper;\
+:heavy_check_mark: Obstacle Detection
+:heavy_check_mark: Client Side GUI
+:heavy_check_mark: Configurable PID
+:heavy_check_mark: Modular Sensors  
+:heavy_check_mark: Educational Wrapper
 
 
 
-<!-- ## :rocket: Technologies ##
+## :rocket: Technologies ## 
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/) -->
+-[Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
+-[Python](https://www.python.org/)
+-[Tkinter](https://docs.python.org/3/library/tk.html)
+-[MatPlotLib](https://matplotlib.org/)
+
+
 <!-- 
 ## :white_check_mark: Requirements ##
 
