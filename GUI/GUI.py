@@ -118,6 +118,20 @@ class PID():
 class Obstacle_Detection_Map():
     def __init__(self) -> None:
         pass
+    
+    def Generate_Frame(self, parent_frame, x, y) -> None:
+        pass
+
+    def resize(self) -> None:
+        pass
+    
+    def create_pip(self) -> None:
+        pass
+
+    def create_robot(self) -> None:
+        pass
+
+
 
 ###########################################################################
 # The below class will create a widget that shows the previous ten seconds
@@ -127,6 +141,19 @@ class Obstacle_Detection_Map():
 class Damping_Features():
     def __init__(self) -> None:
         pass
+
+    def Generate_Frame(self,parent_frame, x, y) -> None:
+        pass
+
+    def Get_Reference_Signal(self) -> float:
+        pass
+
+    def Get_Actual_Signal(self) -> float:
+        pass
+
+    def Get_Error_Signal(self) -> float:
+        pass
+
 
 
 

@@ -8,12 +8,12 @@
 
 <h1 align="center">SegwayRobot</h1>
 
-<p align="center">
+<!-- <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8">
 
   <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8"> -->
 
   <!-- <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/segwayrobot?color=56BEB8"> -->
 
@@ -50,11 +50,11 @@ This repository stores all the information about our teams Segway Robot Senior d
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: Obstacle Detection
-:heavy_check_mark: Client Side GUI
-:heavy_check_mark: Configurable PID
+:heavy_check_mark: Obstacle Detection  
+:heavy_check_mark: Client Side GUI  
+:heavy_check_mark: Configurable PID  
 :heavy_check_mark: Modular Sensors  
-:heavy_check_mark: Educational Wrapper
+:heavy_check_mark: Educational Wrapper  
 
 
 
@@ -62,10 +62,10 @@ This repository stores all the information about our teams Segway Robot Senior d
 
 The following tools were used in this project:
 
--[Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
--[Python](https://www.python.org/)
--[Tkinter](https://docs.python.org/3/library/tk.html)
--[MatPlotLib](https://matplotlib.org/)
+-[Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)  
+-[Python](https://www.python.org/)  
+-[Tkinter](https://docs.python.org/3/library/tk.html)  
+-[MatPlotLib](https://matplotlib.org/)  
 
 
 <!-- 
