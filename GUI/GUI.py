@@ -15,15 +15,16 @@ class Robot_Tilt():
         
         pass
 
-    def Generate_Frame(self, parentFrame, x, y) -> None:
-        self.frame = tk.Frame(parentFrame, padx= 25, pady= 25)
-        self.frame.grid(row= x, column= y)
+    def Generate_Frame(self, parent_frame, x, y, rowspan, colspan) -> None:
+        self.frame = tk.Frame(parent_frame, padx= 25, pady= 25)
+        self.frame.grid(row= x, column= y, rowspan= rowspan, columnspan= colspan)
         title= tk.Label(self.frame, text= "Robot Tilt Graphic")
         self.canvas = tk.Canvas(self.frame, bg= 'white', width= self.canvas_size[0], height= self.canvas_size[1])
 
         self.Create_Wheel(self.robot_wheel_radius)
         self.Create_Vertical_Axis(self.robot_wheel_radius)
-        self.Create_Azimuth(-45, self.robot_wheel_radius, 400)
+        self.Create_Azimuth(15, self.robot_wheel_radius, 400)
+        # self.Create_Theta_Arc(15, self.robot_wheel_radius)
         
         title.grid(row= 0, column= 0)
         self.canvas.grid(row= 1, column= 0)
@@ -36,22 +37,36 @@ class Robot_Tilt():
         pass
 
     def Create_Vertical_Axis(self, radius) -> None:
-        self.canvas.create_line(self.canvas_size[0]/2, self.canvas_size[1] - radius, self.canvas_size[0]/2, 0, dash= 5, fill= 'red')
+        self.canvas.create_line(self.canvas_size[0]/2, self.canvas_size[1] - radius, self.canvas_size[0]/2, 0, dash= 5, fill= 'black')
         pass
 
     def Create_Azimuth(self, angle, radius, length) -> None:
 
         angle = self.Degree_To_Radian(angle)
         
+        x1 = self.canvas_size[0]/2
+        y1 = self.canvas_size[1] - radius
         x2 = (int(np.sin(angle) * length) + self.canvas_size[0]/2)
         y2 = self.canvas_size[1] - radius - int(np.cos(angle) * length)
 
-        self.canvas.create_line(self.canvas_size[0]/2, self.canvas_size[1] - radius, x2, y2, dash = 10, fill= 'black')
+        self.canvas.create_line(x1, y1, x2, y2, dash = 5, fill= 'red')
 
         pass
 
-    def Create_Theta_Arc(self, angle, radius) -> None:
-        pass
+    # def Create_Theta_Arc(self, angle, radius) -> None:
+    #     angle = self.Degree_To_Radian(angle)
+
+        
+    #     length = self.canvas_size[1] - radius * 3/4
+
+    #     x1 = self.canvas_size[0]/2
+    #     y1 = self.canvas_size[1]
+    #     x2 = (int(np.sin(angle) * length) + self.canvas_size[0]/2)
+    #     y2 = self.canvas_size[1] - radius - int(np.cos(angle) * length)
+
+    #     self.canvas.create_arc(x1, y1, x2, y2, style= tk.ARC)
+
+
 
     def Degree_To_Radian(self, angle) -> float:
         return angle * (np.pi / 180)
@@ -80,9 +95,9 @@ class PID():
         self.D_LIMIT = (0, 100)
 
 
-    def Generate_Frame(self, parent_frame, x, y) -> None:
+    def Generate_Frame(self, parent_frame, x, y, rowspan, colspan) -> None:
         PID_frame = tk.Frame(master= parent_frame)
-        PID_frame.grid(row= x,column= y, padx= 25, pady= 25)
+        PID_frame.grid(row= x,column= y, rowspan= rowspan, columnspan= colspan, padx= 25, pady= 25)
 
         self.p_s = tk.IntVar(PID_frame, value= self.p)
         self.i_s = tk.IntVar(PID_frame, value= self.i)
@@ -140,10 +155,33 @@ class Obstacle_Detection_Map():
 ###########################################################################
 class Damping_Features():
     def __init__(self) -> None:
+        self.settling_time = 0
+        self.overshoot = 0
+        self.rise_time = 0
+        self.damping_ratio = 0
+        self.peaking_time = 0
         pass
 
-    def Generate_Frame(self,parent_frame, x, y) -> None:
-        pass
+    def Generate_Frame(self,parent_frame, x, y, rowspan, colspan) -> None:
+        self.frame = tk.Frame(parent_frame, padx= 25, pady= 25)
+        self.frame.grid(row= x, column= y, rowspan= rowspan, columnspan= colspan)
+        title= tk.Label(self.frame, text= "Damping Features")
+        
+        title.grid(row= 0, column= 0, rowspan= 10)
+
+        self.settling_time_label = tk.Label(self.frame, text = f"Settling Time: {self.settling_time}")
+        self.overshoot_label = tk.Label(self.frame, text = f"Overshoot: {self.overshoot}")
+        self.rise_time_label = tk.Label(self.frame, text = f"Rise Time: {self.rise_time}")
+        self.damping_ratio_label = tk.Label(self.frame, text = f"Damping Ratio: {self.damping_ratio}")
+        self.peaking__time_label = tk.Label(self.frame, text = f"Peaking Time: {self.peaking_time}")
+
+
+        self.damping_ratio_label.grid(row= 2, column=0)
+        self.overshoot_label.grid(row= 2, column= 1)
+        self.rise_time_label.grid(row= 2, column= 2)
+        self.peaking__time_label.grid(row= 2, column= 3)
+        self.settling_time_label.grid(row=2, column= 4)
+
 
     def Get_Reference_Signal(self) -> float:
         pass
@@ -154,6 +192,15 @@ class Damping_Features():
     def Get_Error_Signal(self) -> float:
         pass
 
+class Aprroximate_System_Model():
+    def __init__(self) -> None:
+        pass
+
+    def generate_frame(self, parent_frame, x, y, rowspan, colspan):
+        pass
+
+    def feed_forward() -> None:
+        pass
 
 
 
@@ -165,8 +212,10 @@ if __name__ == "__main__":
     mainframe.grid(row= 0, column= 0)
     my_PID = PID()
     my_tilt = Robot_Tilt()
-    my_PID.Generate_Frame(mainframe, 0, 0)
-    my_tilt.Generate_Frame(mainframe, 0, 1)
+    my_damping = Damping_Features()
+    my_PID.Generate_Frame(mainframe, 0, 0, rowspan= 1, colspan= 1)
+    my_tilt.Generate_Frame(mainframe, 0, 1, rowspan= 1, colspan= 1)
+    my_damping.Generate_Frame(mainframe, 1, 0, rowspan= 2, colspan= 1)
 
   
 
