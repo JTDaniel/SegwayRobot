@@ -11,7 +11,7 @@ class Motor():
 
         self.MAX_FREQ = 65025
         self.MIN_FREQ = 0 
-        self.P_In1 = Pin(In1, .Pin.OUT)
+        self.P_In1 = Pin(In1, Pin.OUT)
         self.P_In2 = Pin(In2, Pin.OUT)
         self.P_En = PWM(Pin(En))
         self.P_En.freq(1000)
@@ -20,17 +20,17 @@ class Motor():
     def DriveForward(self, Speed) -> None:
         self.P_In1.value(ON)
         self.P_In2.value(OFF)
-        self.P_En(Speed)
+        self.P_En.duty_u16(Speed)
 
     def DriveReverse(self, Speed) -> None:
         self.P_In1.value(OFF)
         self.P_In2.value(ON)
-        self.P_En(Speed)
+        self.P_En.duty_u16(Speed)
 
     def Stop(self) -> None:
         self.P_In1.value(OFF)
         self.P_In2.value(OFF)
-        self.P_En(self.MIN_FREQ)
+        self.P_En.duty_u16(self.MIN_FREQ)
 
     def EncoderCount() -> None:
         pass
@@ -42,3 +42,4 @@ class Motor():
 
 
     
+
