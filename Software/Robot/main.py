@@ -8,6 +8,7 @@ from time import sleep
 from machine import Pin, I2C
 from math import atan2, degrees
 from motor import Motor
+from control_loop import ControlLoop
 
 
 ##################################################
@@ -21,8 +22,12 @@ MOTORRIGHT_IN_1 = 22
 MOTORRIGHT_IN_2 = 26
 MOTORRIGHT_EN = 15
 
+dict RobotStateMachine ["SoftStop" : 0, "Auto" : 10, "TeleOp" : 20]
+dict ControlStateMachine["Hover" : 0, "Forward" : 10, "Reverse" : 20, "TurnRight" : 30, \
+"Turn Left" : 40]
 
-
+RobotState = RobotStateMachine["SoftStop"]
+ControlState = ControlStateMachine["Hover"]
 
 
 def vector_2_degrees(x, y):
@@ -37,28 +42,56 @@ def vector_2_degrees(x, y):
 i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=400000)
 imu = MPU6050(i2c)
 
+
 MotorLeft = Motor(MOTORLEFT_IN_1, MOTORLEFT_IN_2, MOTORLEFT_EN)
 MotorRight = Motor(MOTORRIGHT_IN_1, MOTORRIGHT_IN_2, MOTORRIGHT_EN)
 
+Robot = ControlLoop(MotorLeft, MotorRight)
+
 
 while True:
-    ax=round(imu.accel.x,2)
-    ay=round(imu.accel.y,2)
-    az=round(imu.accel.z,2)
-    gx=round(imu.gyro.x)
-    gy=round(imu.gyro.y)
-    gz=round(imu.gyro.z)
 
+    #########################
+    # LOOP INPUTS           #
+    #########################
+
+    #calculate imu properties
+    ax = imu.accel.x
+    ay = imu.accel.y
+    az = imu.accel.z
+    gx = imu.gyro.x
+    gy = imu.gyro.y
+    gz = imu.gyro.z
+
+    #Use acceleration to retrieve inclination
     XZ = vector_2_degrees(ax, az)
     YZ =  vector_2_degrees(ay, az)
 
+    #########################
+    # STATE HANDLER         #
+    #########################
+    # Protect robot by shutting down motors .
+    if Robot.ReferencePoint < Robot.ReverseLimit or Robot.ReferencePoint > self.ForwardLimit:
+        RobotState = RobotStateMachine["SoftStop"] 
+    
+    # add handler to switch between auto and teleop
 
-    if XZ < 90:
-        MotorLeft.DriveForward(MotorLeft.MAX_FREQ)
-        MotorRight.DriveReverse(MotorRight.MAX_FREQ)
-    elif XZ > 90:
-        MotorLeft.DriveReverse(MotorLeft.MAX_FREQ)
-        MotorRight.DriveForward(MotorRight.MAX_FREQ)
+
+    #########################
+    # STATE MACHINE         #
+    #########################
+    if RobotState = RobotStateMachine["SoftStop"]
+        Robot.Stop()
+
+    elif RobotState = RobotStateMachine["Auto"]:
+        pass
+        
+    elif RobotState = RobotStateMachine["TeleOp"]:
+        pass
+
+
+  
+
 
 
     print(f"Angle is ({XZ}, {YZ})")

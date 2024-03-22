@@ -40,6 +40,5 @@ class Motor():
     def MoveRelative() -> None:
         pass
 
-
     
 
