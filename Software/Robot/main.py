@@ -4,11 +4,12 @@ LED.on()
 
 
 from imu import MPU6050
-from time import sleep
 from machine import Pin, I2C
 from math import atan2, degrees
 from motor import Motor
 from control_loop import ControlLoop
+from ping import UltraSonic
+import time
 
 
 ##################################################
@@ -16,18 +17,20 @@ from control_loop import ControlLoop
 ##################################################
 MOTORLEFT_IN_1 = 27
 MOTORLEFT_IN_2 = 28
-MOTORLEFT_EN = 13
+MOTORLEFT_EN = 14
 
 MOTORRIGHT_IN_1 = 22
 MOTORRIGHT_IN_2 = 26
 MOTORRIGHT_EN = 15
 
-dict RobotStateMachine ["SoftStop" : 0, "Auto" : 10, "TeleOp" : 20]
-dict ControlStateMachine["Hover" : 0, "Forward" : 10, "Reverse" : 20, "TurnRight" : 30, \
-"Turn Left" : 40]
+RobotStateMachine = {"SoftStop" : 0, "Auto" : 10, "TeleOp" : 20}
+ControlStateMachine = {"Hover" : 0, "Forward" : 10, "Reverse" : 20, "TurnRight" : 30, \
+"TurnLeft" : 40}
 
-RobotState = RobotStateMachine["SoftStop"]
+RobotState = RobotStateMachine["Auto"]
 ControlState = ControlStateMachine["Hover"]
+
+HOVER_TIME = 10 #seconds before moving
 
 
 def vector_2_degrees(x, y):
@@ -39,14 +42,18 @@ def vector_2_degrees(x, y):
 
 
 
+
+##################################################
+# Instantiate Robot, Sensors, and Motors
+##################################################
 i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=400000)
 imu = MPU6050(i2c)
+Robot = ControlLoop()
+Robot.MotorLeft = Motor(MOTORLEFT_IN_1, MOTORLEFT_IN_2, MOTORLEFT_EN)
+Robot.MotorRight = Motor(MOTORRIGHT_IN_1, MOTORRIGHT_IN_2, MOTORRIGHT_EN)
+Ping = [UltraSonic(13,12), UltraSonic(3,4), UltraSonic(9,8)]
 
 
-MotorLeft = Motor(MOTORLEFT_IN_1, MOTORLEFT_IN_2, MOTORLEFT_EN)
-MotorRight = Motor(MOTORRIGHT_IN_1, MOTORRIGHT_IN_2, MOTORRIGHT_EN)
-
-Robot = ControlLoop(MotorLeft, MotorRight)
 
 
 while True:
@@ -57,36 +64,71 @@ while True:
 
     #calculate imu properties
     ax = imu.accel.x
-    ay = imu.accel.y
+    #ay = imu.accel.y
     az = imu.accel.z
-    gx = imu.gyro.x
-    gy = imu.gyro.y
-    gz = imu.gyro.z
+    #gx = imu.gyro.x
+    #gy = imu.gyro.y
+    #gz = imu.gyro.z
 
     #Use acceleration to retrieve inclination
     XZ = vector_2_degrees(ax, az)
-    YZ =  vector_2_degrees(ay, az)
+    #YZ =  vector_2_degrees(ay, az)
 
+    Robot.ReferencePoint = XZ
+    
     #########################
     # STATE HANDLER         #
     #########################
     # Protect robot by shutting down motors .
-    if Robot.ReferencePoint < Robot.ReverseLimit or Robot.ReferencePoint > self.ForwardLimit:
-        RobotState = RobotStateMachine["SoftStop"] 
-    
+   
+    if Robot.ReferencePoint < Robot.ReverseLimit and Robot.ReferencePoint < Robot.ForwardLimit \
+       or Robot.ReferencePoint > Robot.ForwardLimit and Robot.ReferencePoint > Robot.ReverseLimit:
+        RobotState = RobotStateMachine["SoftStop"]
+    else:
+        RobotState = RobotStateMachine["Auto"]
+   
     # add handler to switch between auto and teleop
 
 
     #########################
     # STATE MACHINE         #
     #########################
-    if RobotState = RobotStateMachine["SoftStop"]
+    if ControlState != ControlStateMachine["Hover"]: hoverStartTime = time.time()
+    if ControlState == ControlState["Hover"]: avoidStartTime = time.time()
+    if RobotState == RobotStateMachine["SoftStop"]:
         Robot.Stop()
 
-    elif RobotState = RobotStateMachine["Auto"]:
-        pass
+    elif RobotState == RobotStateMachine["Auto"]:
         
-    elif RobotState = RobotStateMachine["TeleOp"]:
+        
+        if ControlState == ControlStateMachine["Hover"]: 
+            hoverElapsedTime = time.time() - hoverStartTime
+            Robot.Balance()
+            # if hoverElapsedTime > HOVER_TIME:
+            #     ControlState = ControlStateMachine["Forward"]
+
+        
+        if UltraSonic[0].obstacleDetected(): ControlState = ControlStateMachine["TurnLeft"]
+        if ControlState == ControlStateMachine["TurnLeft"]:
+            avoidElapsedTime = time.time() - avoidStartTime
+            Robot.TurnLeft()
+            if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
+      
+        # if UltraSonic[1].obstacleDetected(): ControlState = ControlStateMachine["Reverse"]
+        # if ControlState == ControlStateMachine["Reverse"]:
+        #     avoidElapsedTime = time.time() - avoidStartTime
+        #     Robot.MoveBackward()
+        #     if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
+           
+
+        if UltraSonic[3].obstacleDetected(): ControlState = ControlStateMachine["TurnRight"]
+        if ControlState == ControlStateMachine["TurnRight"]:
+            avoidElapsedTime = time.time() - avoidStartTime
+            Robot.TurnRight()
+            if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
+
+        
+    elif RobotState == RobotStateMachine["TeleOp"]:
         pass
 
 
@@ -94,6 +136,10 @@ while True:
 
 
 
-    print(f"Angle is ({XZ}, {YZ})")
+    print(f"Angle is ({XZ})")
+
+
+
+
 
 
