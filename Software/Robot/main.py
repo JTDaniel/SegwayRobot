@@ -9,7 +9,20 @@ from math import atan2, degrees
 from motor import Motor
 from control_loop import ControlLoop
 from ping import UltraSonic
+import _thread
 import time
+
+
+def vector_2_degrees(x, y):
+    angle = degrees(atan2(y, x))
+    if angle < 0:
+        angle += 360
+    return angle
+
+def obstacle_thread(sensor1, sensor2):
+    result = [sensor1.obstacleDetected(), sensor2.obstacleDetected()]
+    print(result)
+    return result
 
 
 ##################################################
@@ -32,17 +45,6 @@ ControlState = ControlStateMachine["Hover"]
 
 HOVER_TIME = 10 #seconds before moving
 
-
-def vector_2_degrees(x, y):
-    angle = degrees(atan2(y, x))
-    if angle < 0:
-        angle += 360
-    return angle
-
-
-
-
-
 ##################################################
 # Instantiate Robot, Sensors, and Motors
 ##################################################
@@ -51,8 +53,9 @@ imu = MPU6050(i2c)
 Robot = ControlLoop()
 Robot.MotorLeft = Motor(MOTORLEFT_IN_1, MOTORLEFT_IN_2, MOTORLEFT_EN)
 Robot.MotorRight = Motor(MOTORRIGHT_IN_1, MOTORRIGHT_IN_2, MOTORRIGHT_EN)
-Ping = [UltraSonic(13,12), UltraSonic(3,4), UltraSonic(9,8)]
+Ping = [UltraSonic(13,12), UltraSonic(9,8)]
 
+_thread.start_new_thread(obstacle_thread, Ping)
 
 
 
@@ -75,7 +78,10 @@ while True:
     #YZ =  vector_2_degrees(ay, az)
 
     Robot.ReferencePoint = XZ
-    
+    try:
+        detected = _thread.start_new_thread(obstacle_thread, Ping)
+    except OSError:
+        pass
     #########################
     # STATE HANDLER         #
     #########################
@@ -93,8 +99,8 @@ while True:
     #########################
     # STATE MACHINE         #
     #########################
-    if ControlState != ControlStateMachine["Hover"]: hoverStartTime = time.time()
-    if ControlState == ControlState["Hover"]: avoidStartTime = time.time()
+    #if ControlState != ControlStateMachine["Hover"]: hoverStartTime = time.time()
+    #if ControlState == ControlState["Hover"]: avoidStartTime = time.time()
     if RobotState == RobotStateMachine["SoftStop"]:
         Robot.Stop()
 
@@ -102,17 +108,19 @@ while True:
         
         
         if ControlState == ControlStateMachine["Hover"]: 
-            hoverElapsedTime = time.time() - hoverStartTime
+            #hoverElapsedTime = time.time() - hoverStartTime
             Robot.Balance()
             # if hoverElapsedTime > HOVER_TIME:
             #     ControlState = ControlStateMachine["Forward"]
 
         
-        if UltraSonic[0].obstacleDetected(): ControlState = ControlStateMachine["TurnLeft"]
+       #if Ping[1].obstacleDetected():
+        #    ControlState = ControlStateMachine["TurnLeft"]
+         #   print("Obstacle Detected On Right!")
         if ControlState == ControlStateMachine["TurnLeft"]:
-            avoidElapsedTime = time.time() - avoidStartTime
+            #avoidElapsedTime = time.time() - avoidStartTime
             Robot.TurnLeft()
-            if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
+            #if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
       
         # if UltraSonic[1].obstacleDetected(): ControlState = ControlStateMachine["Reverse"]
         # if ControlState == ControlStateMachine["Reverse"]:
@@ -121,11 +129,13 @@ while True:
         #     if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
            
 
-        if UltraSonic[3].obstacleDetected(): ControlState = ControlStateMachine["TurnRight"]
+        #if Ping[0].obstacleDetected():
+         #   ControlState = ControlStateMachine["TurnRight"]
+          #  print("Obstacle Detected On Left!")
         if ControlState == ControlStateMachine["TurnRight"]:
-            avoidElapsedTime = time.time() - avoidStartTime
+            #avoidElapsedTime = time.time() - avoidStartTime
             Robot.TurnRight()
-            if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
+            #if avoidElapsedTime > 3: ControlState = ControlStateMachine["Hover"]
 
         
     elif RobotState == RobotStateMachine["TeleOp"]:
@@ -136,7 +146,10 @@ while True:
 
 
 
-    print(f"Angle is ({XZ})")
+
+
+
+
 
 
 

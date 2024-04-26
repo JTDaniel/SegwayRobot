@@ -7,16 +7,17 @@ from motor import Motor
 class ControlLoop():
     
     def __init__(self) -> None:
-        self.Vertical = 281
+        self.Vertical = 280
         self.ForwardLimit = self.Vertical - 50
         self.ReverseLimit = self.Vertical + 50
         self.Setpoint = self.Vertical
-        self.P = 2500
-        self.I = 50
+        self.P = 3000
+        self.I = 2000
         self.D = 0
+        self.TS = 10
         self.historian = []
-        self.HISTORIAN_LIM = 100
-        self.DEADZONE_FREQ = 35000
+        self.HISTORIAN_LIM = 50
+        self.DEADZONE_FREQ = 30000
         self.ReferencePoint = None
         self.MotorLeft = None
         self.MotorRight = None
@@ -31,22 +32,23 @@ class ControlLoop():
         return self.error(self.Vertical, self.ReferencePoint) * P 
 
     #accumulate error from a time constant
-    def Integral(self) -> float:
+    def Integral(self, I) -> float:
         self.historian.append(self.error(self.Vertical, self.ReferencePoint))
         try:
-            myHistorian = self.historian[-self.I:]
+            myHistorian = self.historian[-(self.TS):]
         except:
             myHistorian = self.historian[:]
         if len(self.historian) > self.HISTORIAN_LIM: self.historian.pop(0)
-        return sum(myHistorian)/len(myHistorian)
+        result = sum(myHistorian)/len(myHistorian)
+        return result * I
         
 
     #compensate for quick changes in error
     def Derivative(self) -> float:
-        pass
+        return 0
         
     def Balance(self) -> None:
-        motorSpeed = int(self.Proportional(self.P)) # +self.Integral + self.Derivatove
+        motorSpeed = int(self.Proportional(self.P)) + int(self.Integral(self.I)) #+ self.Derivatove
         motorSpeedAbs = abs(motorSpeed) + self.DEADZONE_FREQ
         if motorSpeed > 0:
             self.MotorLeft.DriveForward(motorSpeedAbs)
@@ -54,7 +56,7 @@ class ControlLoop():
         elif motorSpeed <= 0:
             self.MotorLeft.DriveReverse(motorSpeedAbs)
             self.MotorRight.DriveReverse(motorSpeedAbs)
-        print("Balancing" + motorSpeedAbs)
+        #print("Balancing " + str(motorSpeedAbs))
             
     def MoveForward(self) -> None:
         pass
@@ -71,7 +73,7 @@ class ControlLoop():
         elif motorSpeed <= 0:
             self.MotorLeft.DriveReverse(motorSpeedAbs)
             self.MotorRight.DriveReverse(motorSpeedAbs)
-        print("Turning Right " + motorSpeedAbs)
+        #print("Turning Right " + str(motorSpeedAbs))
 
     def TurnLeft(self) -> None:
         motorSpeed = int(self.Proportional(self.P)) # +self.Integral + self.Derivatove
@@ -82,8 +84,9 @@ class ControlLoop():
         elif motorSpeed <= 0:
             self.MotorLeft.DriveReverse(motorSpeedAbs)
             self.MotorRight.DriveReverse(motorSpeedAbs)
-        print("Turning Left " + motorSpeedAbs)
+        #print("Turning Left " + str(motorSpeedAbs))
 
     def Stop(self) -> None:
         self.MotorLeft.Stop()
         self.MotorRight.Stop()
+
